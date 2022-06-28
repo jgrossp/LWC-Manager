@@ -6,5 +6,41 @@
         <lightning-layout-item size="12">
             <div class="greeting">{greeting}</div> 
         </lightning-layout-item>
+
+        <lightning-layout-item size="8">
+            <div class="slds-text-heading_large slds-m-vertical_large">
+                Bora aprender.<br>
+                Qual o foco do dia?
+            </div>
+        </lightning-layout-item>    
+
+        <lightning-layout-item size="12" large-device-size="6" medium-device-size="10" small-device-size="12" 
+            class="slds-m-top_large">
+            <lightning-layout>
+                <lightning-layout-item size="11">
+                    <lightning-input type="text" label="De quoi avez-vous besoin ?" variant="label-hidden" 
+                    placeholder="De quoi avez-vous besoin?">
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="1">
+                    <lightning-button-icon icon-name="utility:add" title="Add Todo" onclick={addTodoHandler}>
+
+                    </lightning-button-icon>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        
+        <lightning-layout-item size="12">
+            <div>Voyons ce que nous avons</div>
+            <template for:each={upcomingTasks} for:item="todo">
+                <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName}></c-to-do-item>
+            </template>
+            <div>Tâche terminée</div>
+            <template for:each={completeTasks} for:item="todo">
+                <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName} done></c-to-do-item>
+                
+            </template>
+        </lightning-layout-item> 
+
     </lightning-layout>
 </template>

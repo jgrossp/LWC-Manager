@@ -1,11 +1,18 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
+import addTodo from "@salesforce/apex/ToDoController.addTodo";
 
 export default class ToDoManager extends LightningElement {
-    time = "22:15 PM";
-    greeting = "Bonsoir";
+    @track time = "22:15 PM";
+    @track greeting = "Bonsoir";
+
+    @track todos= [];
 
     connectedCallback() {
         this.getTime();
+
+        setInterval(() => {
+            this.getTime();
+        }, 1000);
     }
 
     getTime(){
@@ -39,5 +46,33 @@ export default class ToDoManager extends LightningElement {
         }else{
             this.greeting = "Bonsoir";
         }
-    }    
+    } 
+    
+    addTodoHandler(){
+        const inputBox = this.template.querySelector("lightning-input");
+
+        const todo = {            
+            todoName: inputBox.value,
+            done: false,
+        }
+
+        addTodo({payloar:JSON.stringify(todo)}).then(response => {
+            console.log('Item inserted successfully');
+        }).catch(error => {
+            console.error('Error in inserting todo item ' + error);
+        });
+        //this.todos.push(todo);
+        inputBox.value = "";
+    }
+
+    get upcomingTasks(){
+        return this.todos && this.todos.length 
+        ? this.todos.filter(todo => !todo.done) 
+        :[]; 
+    }
+    get completeTasks(){
+        return this.todos && this.todos.length 
+        ? this.todos.filter(todo => todo.done) 
+        :[]; 
+    }
 }

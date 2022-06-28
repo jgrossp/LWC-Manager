@@ -1,0 +1,28 @@
+.todo {
+    border:1px solid lightgray;
+    padding: .5rem;
+    width: fit-content;
+    border-radius: 8px;
+    margin-top: 8px;
+    border-left: auto;
+    border-right: auto;
+    transition: all .5s ease;
+}
+
+.Voyons.ce.que.nous.avons{
+    background-color: lightgreen;
+}
+
+.Voyons.ce.que.nous.avons:hover{
+    background-color: aqua;
+    border-radius: 16px;
+}
+
+.Tâche.terminée{
+    background-color: rgb(240, 74, 151);
+}
+
+.Tâche.terminée:hover{
+    background-color: aliceblue;
+    border-radius: 16px;
+}
